@@ -72,6 +72,8 @@ public class Configurator
         return badAdmins;
     }
     
+    
+    
     public int mistake(String again)
     {
         int mistake = 1;
