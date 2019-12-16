@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class Configurator 
 {
     Scanner keyboard = new Scanner(System.in);
-    static String[] goodUsers, badUsers, goodAdmins,badAdmins;
+    static String[] goodUsers = {}, badUsers = {}, goodAdmins = {}, badAdmins = {};
     
     public Configurator()
     {
@@ -62,13 +62,47 @@ public class Configurator
     
     public String[] goodAdmins()
     {
+        String users;
+        int mistake = 1;
         
+        System.out.println("\nEnter usernames for users meant to be administrators." +
+                           "\nPress enter when finished.");
+        users = keyboard.nextLine();
+        
+        while (mistake == 1)
+        {
+            mistake = mistake("");
+            if(mistake == 0)
+                break;
+            System.out.println("\nEnter usernames for users meant to be administrators." +
+                               "\nPress enter when finished.");
+            users = keyboard.nextLine();
+        }
+        
+        goodAdmins = users.split(" ");
         return goodAdmins;
     }
     
     public String[] badAdmins()
     {
+        String users;
+        int mistake = 1;
         
+        System.out.println("\nEnter usernames users not meant to be administrators." +
+                           "\nPress enter when finished.");
+        users = keyboard.nextLine();
+        
+        while (mistake == 1)
+        {
+            mistake = mistake("");
+            if(mistake == 0)
+                break;
+            System.out.println("\nEnter usernames users not meant to be administrators." +
+                               "\nPress enter when finished.");
+            users = keyboard.nextLine();
+        }
+        
+        badAdmins = users.split(" ");
         return badAdmins;
     }
     
@@ -110,18 +144,30 @@ public class Configurator
             switch (answer)
             {
                 case "Y":
-                    System.out.println("\nGood Users: ");
-                    for (int i = 0; i < goodUsers.length; ++ i) 
-                        System.out.println(goodUsers[i] + " ");
-                    System.out.println("\nBad Users: ");
-                    for (int i = 0; i < badUsers.length; ++ i) 
-                        System.out.println(badUsers[i] + " ");
-                    System.out.println("\nGood Admins: ");
-                    for (int i = 0; i < goodAdmins.length; ++ i) 
-                        System.out.println(goodAdmins[i] + " ");
-                    System.out.println("\nBad Admins: ");
-                    for (int i = 0; i < badAdmins.length; ++ i) 
-                        System.out.println(badAdmins[i] + " ");
+                    if(goodUsers.length > 0)
+                    {
+                        System.out.println("\nGood Users: ");
+                        for (int i = 0; i < goodUsers.length; ++ i) 
+                            System.out.println(goodUsers[i] + " ");
+                    }
+                    if(badUsers.length > 0)
+                    {
+                        System.out.println("\nBad Users: ");
+                        for (int i = 0; i < badUsers.length; ++ i) 
+                            System.out.println(badUsers[i] + " ");
+                    }
+                    if(goodAdmins.length > 0)
+                    {
+                        System.out.println("\nGood Admins: ");
+                        for (int i = 0; i < goodAdmins.length; ++ i) 
+                            System.out.println(goodAdmins[i] + " ");
+                    }
+                    if(badAdmins.length > 0)
+                    {
+                        System.out.println("\nBad Admins: ");
+                        for (int i = 0; i < badAdmins.length; ++ i) 
+                            System.out.println(badAdmins[i] + " ");
+                    }
                     break;
                 case "N":
                     break;
@@ -129,5 +175,10 @@ public class Configurator
                     System.out.println("Please enter \"Y\" or \"N\"");
             }
         }
+    }
+    
+    public void toFile()
+    {
+        
     }
 }
